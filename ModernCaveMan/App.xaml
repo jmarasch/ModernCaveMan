@@ -1,0 +1,9 @@
+﻿<Application
+    x:Class="ModernCaveMan.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:rt="WinRTXamlToolkit"
+    xmlns:local="using:ModernCaveMan"
+    RequestedTheme="Light">
+
+</Application>
