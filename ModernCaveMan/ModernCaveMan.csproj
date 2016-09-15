@@ -138,6 +138,23 @@
       <Name>Windows IoT Extensions for the UWP %28WindowsIoT, Version=10.0.14393.0%29</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="WinRTXamlToolkit">
+      <HintPath>.\WinRTXamlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="WinRTXamlToolkit.Controls.Calendar">
+      <HintPath>.\WinRTXamlToolkit.Controls.Calendar.dll</HintPath>
+    </Reference>
+    <Reference Include="WinRTXamlToolkit.Controls.DataVisualization">
+      <HintPath>.\WinRTXamlToolkit.Controls.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="WinRTXamlToolkit.Controls.Gauge">
+      <HintPath>.\WinRTXamlToolkit.Controls.Gauge.dll</HintPath>
+    </Reference>
+    <Reference Include="WinRTXamlToolkit.Debugging">
+      <HintPath>.\WinRTXamlToolkit.Debugging.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
