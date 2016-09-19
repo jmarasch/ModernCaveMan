@@ -19,5 +19,14 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
+        <local:ProbeControl Grid.Column="0" Grid.Row="0" x:Name="Probe1" ProbeID="1" ProbeColor="Blue" BorderThickness="1"></local:ProbeControl>
+        <local:ProbeControl Grid.Column="1" Grid.Row="0" x:Name="Probe2" ProbeID="2" ProbeColor="Green" BorderThickness="1"></local:ProbeControl>
+        <local:ProbeControl Grid.Column="0" Grid.Row="1" x:Name="Probe3" ProbeID="3" ProbeColor="Red" BorderThickness="1"></local:ProbeControl>
+        <local:ProbeControl Grid.Column="1" Grid.Row="1" x:Name="Probe4" ProbeID="4" ProbeColor="Yellow" BorderThickness="1"></local:ProbeControl>
+        <local:ProbeControl Grid.Column="0" Grid.Row="2" x:Name="Probe5" ProbeID="5" ProbeColor="Lavender" BorderThickness="1"></local:ProbeControl>
+        <local:ProbeControl Grid.Column="1" Grid.Row="2" x:Name="Probe6" ProbeID="6" ProbeColor="LawnGreen" BorderThickness="1"></local:ProbeControl>
+        <local:ProbeControl Grid.Column="0" Grid.Row="3" x:Name="Probe7" ProbeID="7" ProbeColor="Purple" BorderThickness="1"></local:ProbeControl>
+        <local:ProbeControl Grid.Column="1" Grid.Row="3" x:Name="Probe8" ProbeID="8" ProbeColor="Aquamarine" BorderThickness="1"></local:ProbeControl>
+
     </Grid>
 </Page>

@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -92,6 +92,10 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADCControllerProviders\AdcMcp3008ControllerProvider.cs" />
+    <Compile Include="ADCControllerProviders\AdcMcp3008Provider.cs" />
+    <Compile Include="ADCControllerProviders\AdcMcp3208ControllerProvider.cs" />
+    <Compile Include="ADCControllerProviders\AdcMcp3208Provider.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -102,6 +106,7 @@
       <DependentUpon>ProbeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TempReading.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -110,6 +115,7 @@
     <None Include="ModernCaveMan_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Gear-01.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -134,27 +140,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="Syncfusion Controls for UWP XAML, Version=14.2.0.26">
+      <Name>Syncfusion Controls for UWP XAML</Name>
+    </SDKReference>
     <SDKReference Include="WindowsIoT, Version=10.0.14393.0">
       <Name>Windows IoT Extensions for the UWP %28WindowsIoT, Version=10.0.14393.0%29</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="WinRTXamlToolkit">
-      <HintPath>.\WinRTXamlToolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="WinRTXamlToolkit.Controls.Calendar">
-      <HintPath>.\WinRTXamlToolkit.Controls.Calendar.dll</HintPath>
-    </Reference>
-    <Reference Include="WinRTXamlToolkit.Controls.DataVisualization">
-      <HintPath>.\WinRTXamlToolkit.Controls.DataVisualization.dll</HintPath>
-    </Reference>
-    <Reference Include="WinRTXamlToolkit.Controls.Gauge">
-      <HintPath>.\WinRTXamlToolkit.Controls.Gauge.dll</HintPath>
-    </Reference>
-    <Reference Include="WinRTXamlToolkit.Debugging">
-      <HintPath>.\WinRTXamlToolkit.Debugging.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

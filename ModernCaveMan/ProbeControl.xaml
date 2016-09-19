@@ -5,25 +5,86 @@
     xmlns:local="using:ModernCaveMan"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:WinRTXamlToolkit.Controls"
+    xmlns:sfg="using:Syncfusion.UI.Xaml.Gauges"
+    xmlns:sfc="using:Syncfusion.UI.Xaml.Charts" 
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignHeight="200"
+    d:DesignWidth="400"
+    Background="Black">
 
-    <Grid>
-        <controls:Gauge
-                    Minimum="0"
-                    Maximum="100"
-                    Height="200"
-                    Value="200"
-                    NeedleBrush="Transparent"
-                    ScaleTickBrush="Black"
-                    ScaleBrush="DarkSlateGray"
-                    TickBrush="Transparent"
-                    TrailBrush="DarkSeaGreen"
-                    ValueBrush="DarkSeaGreen"
-                    ValueStringFormat="N1"
-                    Unit="° Fahrenheit"
-                    UnitBrush="DarkGray" />
+    <Grid x:Name="MainGrid" BorderBrush="Black" BorderThickness="1" Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="50*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >Settings</Button>
+
+        <sfg:SfCircularGauge Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"  GaugeHeaderPosition="0.45,0.8" HeaderAlignment="Custom">
+            <sfg:SfCircularGauge.Scales>
+                <sfg:CircularScale StartAngle="135" 
+                                   SweepAngle="270" 
+                                   StartValue="175"
+                                   TickStroke="DarkGray"
+                                   TickLength="5"
+                                   TickShape="Triangle"
+                                   SmallTickLength="3"
+                                   SmallTickStroke="Gray"
+                                   TickStrokeThickness="2"
+                                   EndValue="325"
+                                   Interval="25"
+                                   LabelStroke="Red"
+                                   LabelAutoSizeChange="True"
+                                   LabelOffset="5"
+                                   EnableSmartLabels="True"
+                                   NumericScaleType="Auto"
+                                   NoOfFractionalDigit="0"
+                                   LabelPostfix="°"
+                                   LabelPosition="Inside"
+                                   >
+                    <sfg:CircularScale.Ranges>
+                        <sfg:CircularRange StartValue="0" 
+                                             EndValue="200" Stroke="red" />
+                        <sfg:CircularRange StartValue="200" 
+                                             EndValue="225" Stroke="Orange" />
+                        <sfg:CircularRange StartValue="225" 
+                                             EndValue="275" Stroke="Green" />
+                        <sfg:CircularRange StartValue="275" 
+                                             EndValue="300" Stroke="Orange" />
+                        <sfg:CircularRange StartValue="300" 
+                                             EndValue="500" Stroke="red" />
+                    </sfg:CircularScale.Ranges>
+                    <sfg:CircularScale.Pointers>
+                        <sfg:CircularPointer PointerType="NeedlePointer" Value="{Binding TempsList[0].Temp}" NeedlePointerStroke="Blue" PointerCapDiameter="2"/>
+                    </sfg:CircularScale.Pointers>
+                </sfg:CircularScale>
+            </sfg:SfCircularGauge.Scales>
+        </sfg:SfCircularGauge>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <TextBlock x:Name="lblTemp" TextWrapping="Wrap" FontSize="75*" HorizontalAlignment="Center" Text="{Binding TempsList[0].Temp}" />
+            <TextBlock x:Name="lblTarget" TextWrapping="Wrap" Text="Target Temp: 250°"/>
+        </StackPanel>
+        <TextBlock x:Name="lblProbeID" Grid.Row="1" Grid.Column="2" Text="1" FontSize="50*" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <sfc:SfLineSparkline x:Name="Line" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                RangeBandBrush="Green" 
+                                Stroke="Green"
+                                Interior="Green"
+                                EnableAnimation="True"
+                                MarkerVisibility="Collapsed"
+                                Margin="1"
+                                StrokeThickness="1" 
+                                ItemsSource="{Binding TempsList}"
+                                YBindingPath="Temp"
+                                BandRangeStart="225"   
+                                BandRangeEnd="275" >
+            <sfc:SfLineSparkline.MarkerTemplateSelector>
+                <sfc:MarkerTemplateSelector x:Name="LineTemplate" FirstPointBrush="Red" LastPointBrush="Green" 
+                                                                      LowPointBrush="DarkGray" HighPointBrush="DarkGoldenrod"/>
+            </sfc:SfLineSparkline.MarkerTemplateSelector>
+        </sfc:SfLineSparkline>
     </Grid>
 </UserControl>

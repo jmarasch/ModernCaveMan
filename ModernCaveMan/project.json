@@ -1,6 +1,9 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+    "Microsoft.IoT.AdcMcp3008": "1.0.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "Microsoft.Toolkit.Uwp.UI.Controls": "1.0.0",
+    "System.Collections.NonGeneric": "4.0.1"
   },
   "frameworks": {
     "uap10.0": {}

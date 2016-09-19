@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:rt="WinRTXamlToolkit"
     xmlns:local="using:ModernCaveMan"
+    xmlns:sfg="using:Syncfusion.UI.Xaml.Gauges"
     RequestedTheme="Light">
 
 </Application>

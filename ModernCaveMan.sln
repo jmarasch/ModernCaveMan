@@ -7,26 +7,38 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModernCaveMan", "ModernCave
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|ARM.ActiveCfg = Debug|ARM
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|ARM.Build.0 = Debug|ARM
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|ARM.Deploy.0 = Debug|ARM
+		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|x64.ActiveCfg = Debug|x64
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|x64.Build.0 = Debug|x64
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|x64.Deploy.0 = Debug|x64
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|x86.ActiveCfg = Debug|x86
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|x86.Build.0 = Debug|x86
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Debug|x86.Deploy.0 = Debug|x86
+		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Release|Any CPU.ActiveCfg = Release|x86
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Release|ARM.ActiveCfg = Release|ARM
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Release|ARM.Build.0 = Release|ARM
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Release|ARM.Deploy.0 = Release|ARM
+		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Release|Mixed Platforms.Build.0 = Release|x86
+		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Release|Mixed Platforms.Deploy.0 = Release|x86
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Release|x64.ActiveCfg = Release|x64
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Release|x64.Build.0 = Release|x64
 		{8C8E389C-381C-4BB6-9A48-A67352F72EA2}.Release|x64.Deploy.0 = Release|x64
@@ -36,5 +48,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.FileWidth = 120
+		$1.TabsToSpaces = False
+		$1.inheritsSet = VisualStudio
+		$1.inheritsScope = text/plain
+		StartupItem = Raspberry.IO.GeneralPurpose\Raspberry.IO.GeneralPurpose.csproj
 	EndGlobalSection
 EndGlobal
