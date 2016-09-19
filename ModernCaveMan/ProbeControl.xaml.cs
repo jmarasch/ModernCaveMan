@@ -57,7 +57,7 @@ namespace ModernCaveMan {
 
             }
         }
-    public class TempReading {
+    public class TempReadingx {
         public DateTime ReadingTime { get; set; }
         public double Temp { get; set; }
         }
