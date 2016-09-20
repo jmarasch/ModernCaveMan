@@ -14,7 +14,7 @@ namespace ModernCaveMan {
 
         //need to find formula for converting thermister reading to temperature
 
-        public int ReadingValue { get; set; }
+        public double ReadingValue { get; set; }
 
         }
     }

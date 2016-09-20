@@ -59,13 +59,13 @@
                                              EndValue="500" Stroke="red" />
                     </sfg:CircularScale.Ranges>
                     <sfg:CircularScale.Pointers>
-                        <sfg:CircularPointer PointerType="NeedlePointer" Value="{Binding TempsList[0].Temp}" NeedlePointerStroke="Blue" PointerCapDiameter="2"/>
+                        <sfg:CircularPointer PointerType="NeedlePointer" Value="{Binding GraphHistory[0].ReadingValue}" NeedlePointerStroke="Blue" PointerCapDiameter="2"/>
                     </sfg:CircularScale.Pointers>
                 </sfg:CircularScale>
             </sfg:SfCircularGauge.Scales>
         </sfg:SfCircularGauge>
         <StackPanel Grid.Row="0" Grid.Column="0">
-            <TextBlock x:Name="lblTemp" TextWrapping="Wrap" FontSize="75*" HorizontalAlignment="Center" Text="{Binding TempsList[0].Temp}" />
+            <TextBlock x:Name="lblTemp" TextWrapping="Wrap" FontSize="75*" HorizontalAlignment="Center" Text="{Binding GraphHistory[0].ReadingValue}" />
             <TextBlock x:Name="lblTarget" TextWrapping="Wrap" Text="Target Temp: 250°"/>
         </StackPanel>
         <TextBlock x:Name="lblProbeID" Grid.Row="1" Grid.Column="2" Text="1" FontSize="50*" HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -77,8 +77,8 @@
                                 MarkerVisibility="Collapsed"
                                 Margin="1"
                                 StrokeThickness="1" 
-                                ItemsSource="{Binding TempsList}"
-                                YBindingPath="Temp"
+                                ItemsSource="{Binding GraphHistory}"
+                                YBindingPath="ReadingValue"
                                 BandRangeStart="225"   
                                 BandRangeEnd="275" >
             <sfc:SfLineSparkline.MarkerTemplateSelector>

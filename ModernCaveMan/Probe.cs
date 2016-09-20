@@ -21,6 +21,10 @@ namespace ModernCaveMan {
 
         private const int MAX_DISPLAY_READINGS = 60;
 
+        public ObservableCollection<TempReading> GraphHistory {
+            get { return _graphedReadings; }
+            }
+
         public Probe() {
             _readings = new ObservableCollection<TempReading>();
             _graphedReadings = new ObservableCollection<TempReading>();
@@ -45,7 +49,7 @@ namespace ModernCaveMan {
 
         public void AddReading(double temp) {
             if (_graphedReadings.Count > MAX_DISPLAY_READINGS) _graphedReadings.RemoveAt(_graphedReadings.Count - 1);
-            TempReading newReading = new TempReading { Temp = temp, ReadingTime = DateTime.Now };
+            TempReading newReading = new TempReading { ReadingValue = temp, ReadingTime = DateTime.Now };
             _graphedReadings.Insert(0, newReading);
             _readings.Insert(0, newReading);
             }

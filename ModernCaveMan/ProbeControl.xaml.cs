@@ -19,11 +19,11 @@ using Windows.UI.Xaml.Navigation;
 namespace ModernCaveMan {
     public sealed partial class ProbeControl : UserControl {
         DispatcherTimer timer = new DispatcherTimer();
-        TempViewModel tempdata = new TempViewModel();
+        Probe probedata = new Probe();
 
         public ProbeControl() {
             this.InitializeComponent();
-            this.DataContext = tempdata;
+            this.DataContext = probedata;
 
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
@@ -46,14 +46,14 @@ namespace ModernCaveMan {
             }
 
         private void Timer_Tick(object sender, object e) {
-            TempReading LAST = tempdata.Last;
-            if (LAST == null) LAST = new TempReading { Temp = 250, ReadingTime = DateTime.Now };
+            TempReading LAST = probedata.Last();
+            if (LAST == null) LAST = new TempReading { ReadingValue = 250, ReadingTime = DateTime.Now };
             Random rnd = new Random();
-            int newtmp = rnd.Next((int)LAST.Temp - 5, (int)LAST.Temp + 5);
+            int newtmp = rnd.Next((int)LAST.ReadingValue - 5, (int)LAST.ReadingValue + 5);
             if (newtmp > 300) newtmp = 300;
             if (newtmp < 200) newtmp = 200;
 
-            tempdata.AddReading(newtmp);
+            probedata.AddReading(newtmp);
 
             }
         }
@@ -68,7 +68,7 @@ namespace ModernCaveMan {
 
         public void AddReading(double temp) {
             if (TempsList.Count > MAX_GRAPH_DISPLAY) TempsList.RemoveAt(TempsList.Count-1);
-            TempsList.Insert(0, new TempReading { Temp = temp, ReadingTime = DateTime.Now });
+            TempsList.Insert(0, new TempReading { ReadingValue = temp, ReadingTime = DateTime.Now });
             }
 
         public TempReading Last {
