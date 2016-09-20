@@ -11,6 +11,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -19,6 +20,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
+        <ListBox x:Name="ConsoleBox" Grid.Column="2" Grid.RowSpan="4" />
         <local:ProbeControl Grid.Column="0" Grid.Row="0" x:Name="Probe1" ProbeID="1" ProbeColor="Blue" BorderThickness="1"></local:ProbeControl>
         <local:ProbeControl Grid.Column="1" Grid.Row="0" x:Name="Probe2" ProbeID="2" ProbeColor="Green" BorderThickness="1"></local:ProbeControl>
         <local:ProbeControl Grid.Column="0" Grid.Row="1" x:Name="Probe3" ProbeID="3" ProbeColor="Red" BorderThickness="1"></local:ProbeControl>
