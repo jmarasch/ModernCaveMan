@@ -23,7 +23,7 @@ namespace ModernCaveMan {
     public sealed partial class ProbeControl : UserControl {
         //DispatcherTimer timer = new DispatcherTimer();
         Probe probedata;
-        SolidColorBrush colorRed\ = new SolidColorBrush(Colors.Red);
+        SolidColorBrush colorRed = new SolidColorBrush(Colors.Red);
         SolidColorBrush colorGreen = new SolidColorBrush(Colors.Green);
         SolidColorBrush colorClear = new SolidColorBrush();
 
@@ -40,14 +40,70 @@ namespace ModernCaveMan {
         public bool SetProbeAsTarget(Double temp) {
             probedata.ProbeType = ProbeTypeEnu.Target;
             probedata.TempTarget = temp;
+
+            SetTargetVisuals();
+
             return true;
             }
+
+        private void SetTargetVisuals() {
+
+            }
+
         public bool SetProbeAsRange(Double temp, double min, double max) {
             probedata.ProbeType = ProbeTypeEnu.Range;
             probedata.TempTarget = temp;
             probedata.TempMin = min;
             probedata.TempMax = max;
+
+            SetRangeVisuals();
+
             return true;
+            }
+
+
+        private void SetRangeVisuals() {
+            //        < sfg:CircularScale x:Name = "CircleScale"
+            //               StartAngle = "135"
+            //               SweepAngle = "270"
+            //               StartValue = "175"
+            //               TickStroke = "DarkGray"
+            //               TickLength = "5"
+            //               TickShape = "Triangle"
+            //               SmallTickLength = "3"
+            //               SmallTickStroke = "Gray"
+            //               TickStrokeThickness = "2"
+            //               EndValue = "325"
+            //               Interval = "25"
+            //               LabelStroke = "Red"
+            //               LabelAutoSizeChange = "True"
+            //               LabelOffset = "5"
+            //               EnableSmartLabels = "True"
+            //               NumericScaleType = "Auto"
+            //               NoOfFractionalDigit = "0"
+            //               LabelPostfix = "°"
+            //               LabelPosition = "Inside"
+            //               >
+            //< sfg:CircularScale.Ranges x:Name = "CircleScaleRanges" >
+
+            RangeLowLow.StartValue = 0;
+
+                //     < sfg:CircularRange StartValue = "0"
+                    //                         EndValue = "200" Stroke = "red" />
+
+            //      < sfg:CircularRange StartValue = "200"
+            //                         EndValue = "225" Stroke = "Orange" />
+
+            //      < sfg:CircularRange StartValue = "225"
+            //                         EndValue = "275" Stroke = "Green" />
+
+            //      < sfg:CircularRange StartValue = "275"
+            //                         EndValue = "300" Stroke = "Orange" />
+
+            //      < sfg:CircularRange StartValue = "300"
+            //                         EndValue = "500" Stroke = "red" />
+
+            //  </ sfg:CircularScale.Ranges >
             }
 
         public ProbeControl(int ID, string FriendlyName, AdcChannel dataChannel, double targetTemp) {
@@ -56,8 +112,30 @@ namespace ModernCaveMan {
 
             probedata = new Probe(ID, FriendlyName, dataChannel, targetTemp);
 
+            SetTargetVisuals();
+
+            AddEvents();
+            }
+
+
+        public ProbeControl(int ID, string FriendlyName, AdcChannel dataChannel, double targetTemp, double min, double max) {
+            this.InitializeComponent();
+            this.DataContext = probedata;
+
+            probedata = new Probe(ID, FriendlyName, dataChannel, targetTemp, min, max);
+
+            SetRangeVisuals();
+
+            AddEvents();
+            }
+
+        private void AddEvents() {
             probedata.ProbeTargetReached += ProbeTargetReached;
             probedata.ProbeOutOfRange += ProbeOutOfRange;
+            probedata.ProbeBackInRange += ProbeBackInRange;
+            }
+        private void ProbeBackInRange(object sender, EventArgs e) {
+            MainGrid.Background = colorClear;
             }
 
         private void ProbeOutOfRange(object sender, EventArgs e) {
@@ -66,13 +144,6 @@ namespace ModernCaveMan {
 
         private void ProbeTargetReached(object sender, EventArgs e) {
             MainGrid.Background = colorGreen;
-            }
-
-        public ProbeControl(int ID, string FriendlyName, AdcChannel dataChannel, double targetTemp, double tempMin, double tempMax) {
-            this.InitializeComponent();
-            this.DataContext = probedata;
-
-            probedata = new Probe(ID, FriendlyName, dataChannel, targetTemp, tempMin, tempMax);
             }
 
         public int ProbeID {

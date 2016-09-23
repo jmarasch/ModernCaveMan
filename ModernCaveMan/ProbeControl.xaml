@@ -23,19 +23,19 @@
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
 
-        <sfg:SfCircularGauge Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"  GaugeHeaderPosition="0.45,0.8" HeaderAlignment="Custom">
+        <sfg:SfCircularGauge x:Name="CircleGauge" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"  GaugeHeaderPosition="0.45,0.8" HeaderAlignment="Custom">
             <sfg:SfCircularGauge.Scales>
                 <sfg:CircularScale StartAngle="135" 
                                    SweepAngle="270" 
-                                   StartValue="175"
                                    TickStroke="DarkGray"
                                    TickLength="5"
                                    TickShape="Triangle"
                                    SmallTickLength="3"
                                    SmallTickStroke="Gray"
                                    TickStrokeThickness="2"
-                                   EndValue="325"
-                                   Interval="25"
+                                   StartValue="190"
+                                   EndValue="260"
+                                   Interval="10"
                                    LabelStroke="Red"
                                    LabelAutoSizeChange="True"
                                    LabelOffset="5"
@@ -44,18 +44,23 @@
                                    NoOfFractionalDigit="0"
                                    LabelPostfix="°"
                                    LabelPosition="Inside"
+                                   FontSize="1"
                                    >
                     <sfg:CircularScale.Ranges>
-                        <sfg:CircularRange StartValue="0" 
-                                             EndValue="200" Stroke="red" />
-                        <sfg:CircularRange StartValue="200" 
-                                             EndValue="225" Stroke="Orange" />
-                        <sfg:CircularRange StartValue="225" 
-                                             EndValue="275" Stroke="Green" />
-                        <sfg:CircularRange StartValue="275" 
-                                             EndValue="300" Stroke="Orange" />
-                        <sfg:CircularRange StartValue="300" 
-                                             EndValue="500" Stroke="red" />
+                        <sfg:CircularRange x:Name="RangeLowLow"
+                            StartValue="0" EndValue="200" Stroke="Red" />
+                        <sfg:CircularRange x:Name="RangeLowMin"
+                            StartValue="200" EndValue="208" Stroke="Orange" />
+                        <sfg:CircularRange x:Name="RangeLow"
+                            StartValue="208" EndValue="216" Stroke="Yellow" />
+                        <sfg:CircularRange x:Name="RangeGreen"
+                            StartValue="216" EndValue="233" Stroke="Green" />
+                        <sfg:CircularRange x:Name="RangeHi"
+                            StartValue="233" EndValue="241" Stroke="Yellow" />
+                        <sfg:CircularRange x:Name="RangeHiMax"
+                            StartValue="241" EndValue="250" Stroke="Orange" />
+                        <sfg:CircularRange x:Name="RangeHiHi"
+                            StartValue="250" EndValue="500" Stroke="Red" />
                     </sfg:CircularScale.Ranges>
                     <sfg:CircularScale.Pointers>
                         <sfg:CircularPointer PointerType="NeedlePointer" Value="{Binding GraphHistory[0].ReadingValue}" NeedlePointerStroke="Blue" PointerCapDiameter="2"/>
@@ -68,7 +73,7 @@
             <TextBlock x:Name="lblTemp" TextWrapping="Wrap" FontSize="62*" HorizontalAlignment="Center" Text="{Binding GraphHistory[0].ReadingValue}" />
             <TextBlock x:Name="lblTarget" TextWrapping="Wrap" Text="Target Temp: 250°"/>
         </StackPanel>
-        <sfc:SfLineSparkline x:Name="Line" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+        <sfc:SfLineSparkline x:Name="TempHistoryGraph" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
                                 RangeBandBrush="Green" 
                                 Stroke="Green"
                                 Interior="Green"
@@ -81,7 +86,7 @@
                                 BandRangeStart="225"   
                                 BandRangeEnd="275" >
             <sfc:SfLineSparkline.MarkerTemplateSelector>
-                <sfc:MarkerTemplateSelector x:Name="LineTemplate" FirstPointBrush="Red" LastPointBrush="Green" 
+                <sfc:MarkerTemplateSelector x:Name="TempHistoryLineTemplate" FirstPointBrush="Red" LastPointBrush="Green" 
                                                                       LowPointBrush="DarkGray" HighPointBrush="DarkGoldenrod"/>
             </sfc:SfLineSparkline.MarkerTemplateSelector>
         </sfc:SfLineSparkline>
