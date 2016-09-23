@@ -3,18 +3,18 @@
   <Class Name="ModernCaveMan.Probe">
     <Position X="7" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>hAAAAAAAAAAAAAAAQAABAEEACAAAAUAAAAACAAAAAEA=</HashCode>
+      <HashCode>hAAAABEAAAAAAEAAQAABAECACAAQBUAAAQQSAAAEACA=</HashCode>
       <FileName>Probe.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ModernCaveMan.TempReading">
     <Position X="10.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAgAAAAAAAgAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAEAAAAgAAAAAEAAAAAAQA=</HashCode>
       <FileName>TempReading.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="ModernCaveMan.ProbeType">
+  <Enum Name="ModernCaveMan.ProbeTypeEnu">
     <Position X="10.25" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>

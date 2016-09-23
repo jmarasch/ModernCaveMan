@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace ModernCaveMan {
-    public enum ProbeType {
+    public enum ProbeTypeEnu {
         Range,
         Target
         }

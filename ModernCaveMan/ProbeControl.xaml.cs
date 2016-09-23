@@ -13,95 +13,76 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Devices.Adc;
+using Windows.UI;
+
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace ModernCaveMan {
     public sealed partial class ProbeControl : UserControl {
-        DispatcherTimer timer = new DispatcherTimer();
-        Probe probedata = new Probe();
+        //DispatcherTimer timer = new DispatcherTimer();
+        Probe probedata;
+        SolidColorBrush colorRed\ = new SolidColorBrush(Colors.Red);
+        SolidColorBrush colorGreen = new SolidColorBrush(Colors.Green);
+        SolidColorBrush colorClear = new SolidColorBrush();
 
-        public ProbeControl() {
+        public string ProbeName {
+            get { return probedata.FriendlyName; }
+            set { probedata.FriendlyName = value; }
+            }
+
+        public AdcChannel ProbeChannel {
+            get { return probedata.DataChannel; }
+            set { probedata.DataChannel = value; }
+            }
+
+        public bool SetProbeAsTarget(Double temp) {
+            probedata.ProbeType = ProbeTypeEnu.Target;
+            probedata.TempTarget = temp;
+            return true;
+            }
+        public bool SetProbeAsRange(Double temp, double min, double max) {
+            probedata.ProbeType = ProbeTypeEnu.Range;
+            probedata.TempTarget = temp;
+            probedata.TempMin = min;
+            probedata.TempMax = max;
+            return true;
+            }
+
+        public ProbeControl(int ID, string FriendlyName, AdcChannel dataChannel, double targetTemp) {
             this.InitializeComponent();
             this.DataContext = probedata;
 
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += Timer_Tick;
-            timer.Start();
+            probedata = new Probe(ID, FriendlyName, dataChannel, targetTemp);
+
+            probedata.ProbeTargetReached += ProbeTargetReached;
+            probedata.ProbeOutOfRange += ProbeOutOfRange;
             }
-        
+
+        private void ProbeOutOfRange(object sender, EventArgs e) {
+            MainGrid.Background = colorRed;
+            }
+
+        private void ProbeTargetReached(object sender, EventArgs e) {
+            MainGrid.Background = colorGreen;
+            }
+
+        public ProbeControl(int ID, string FriendlyName, AdcChannel dataChannel, double targetTemp, double tempMin, double tempMax) {
+            this.InitializeComponent();
+            this.DataContext = probedata;
+
+            probedata = new Probe(ID, FriendlyName, dataChannel, targetTemp, tempMin, tempMax);
+            }
+
         public int ProbeID {
             get { return int.Parse(lblProbeID.Text); }
             set { lblProbeID.Text = value.ToString(); }
             }
 
-        public Brush ProbeColor {
-            get {
-                return MainGrid.Background;
-                }
-            set {
-                //MainGrid.Background = value;
-                //MainGrid.Opacity = .5;
-                }
-            }
-
-        private void Timer_Tick(object sender, object e) {
-            TempReading LAST = probedata.Last();
-            if (LAST == null) LAST = new TempReading { ReadingValue = 250, ReadingTime = DateTime.Now };
-            Random rnd = new Random();
-            int newtmp = rnd.Next((int)LAST.ReadingValue - 5, (int)LAST.ReadingValue + 5);
-            if (newtmp > 300) newtmp = 300;
-            if (newtmp < 200) newtmp = 200;
-
-            probedata.AddReading(newtmp);
-
-            }
-        }
-    public class TempReadingx {
-        public DateTime ReadingTime { get; set; }
-        public double Temp { get; set; }
-        }
-
-    public class TempViewModel {
-        public ObservableCollection<TempReading> TempsList { get; set; }
-        const int MAX_GRAPH_DISPLAY = 30;
-
-        public void AddReading(double temp) {
-            if (TempsList.Count > MAX_GRAPH_DISPLAY) TempsList.RemoveAt(TempsList.Count-1);
-            TempsList.Insert(0, new TempReading { ReadingValue = temp, ReadingTime = DateTime.Now });
-            }
-
-        public TempReading Last {
-            get {
-                if (TempsList.Count <= 0) return null;
-                return TempsList[0];
-                }
-            }
-        public TempViewModel() {
-            this.TempsList = new ObservableCollection<TempReading>();
-
-            //DateTime date = DateTime.Today;
-
-            //TempsList.Add(new TempReading { ReadingTime = date.AddHours(0.5), Temp = 250 });
-
-            //TempsList.Add(new TempReading { ReadingTime = date.AddHours(0.5), Temp = 255 });
-
-            //TempsList.Add(new TempReading { ReadingTime = date.AddHours(0.5), Temp = 265 });
-
-            //TempsList.Add(new TempReading { ReadingTime = date.AddHours(0.5), Temp = 255 });
-
-            //TempsList.Add(new TempReading { ReadingTime = date.AddHours(0.5), Temp = 250 });
-
-            //TempsList.Add(new TempReading { ReadingTime = date.AddHours(0.5), Temp = 245 });
-
-            //TempsList.Add(new TempReading { ReadingTime = date.AddHours(0.5), Temp = 240 });
-
-            //TempsList.Add(new TempReading { ReadingTime = date.AddHours(0.5), Temp = 245 });
-
-            //TempsList.Add(new TempReading { ReadingTime = date.AddHours(0.5), Temp = 250 });
-
-            //TempsList.Add(new TempReading { ReadingTime = date.AddHours(0.5), Temp = 250 });
-
+        public string FriendlyName {
+            get { return probedata.FriendlyName; }
+            set { probedata.FriendlyName = value; }
             }
         }
     } 
