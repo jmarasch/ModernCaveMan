@@ -1,0 +1,59 @@
+﻿<Page
+    x:Class="ProjectCaveMan.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProjectCaveMan"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Viewbox Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="lblch0" Text="" Foreground="White" Margin="10"/>
+        </Viewbox>
+        <Viewbox Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="lblch1" Text="" Foreground="White" Margin="10"/>
+        </Viewbox>
+        <Viewbox Grid.Row="0" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="lblch2" Text="" Foreground="White" Margin="10"/>
+        </Viewbox>
+        <Viewbox Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="lblch3" Text="" Foreground="White" Margin="10"/>
+        </Viewbox>
+        <Viewbox Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="lblch4" Text="" Foreground="White" Margin="10"/>
+        </Viewbox>
+        <Viewbox Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="lblch5" Text="" Foreground="White" Margin="10"/>
+        </Viewbox>
+        <Viewbox Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="lblch6" Text="" Foreground="White" Margin="10"/>
+        </Viewbox>
+        <Viewbox Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="lblch7" Text="" Foreground="White" Margin="10"/>
+        </Viewbox>
+        <Viewbox Grid.Row="2" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="lblTime" Text="" Foreground="White" Margin="10"/>
+        </Viewbox>
+        <Viewbox Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="IntervalReadout" Text="" Foreground="White" Margin="1"/>
+        </Viewbox>
+        <Viewbox Grid.Row="3" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="SamplesReadout" Text="" Foreground="White" Margin="1"/>
+        </Viewbox>
+        <Viewbox Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="commands" Text="" Foreground="White" Margin="1"/>
+        </Viewbox>
+    </Grid>
+</Page>

@@ -1,0 +1,11 @@
+﻿X-Read 1 probe
+X-Make resonably acurate
+X-have ui show readout
+X-allow program to adjust sample rate per probe
+X-name probes
+X-save out probe data to csv file
+attach lcd screen to go "headless"
+ability to set alarms target/range
+chose to display C/F/K
+Sounds for alarms
+Show historical graphs on monitor

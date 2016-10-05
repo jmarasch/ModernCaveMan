@@ -2,11 +2,17 @@
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.Devices.Adc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ModernCaveMan {
     public class Probe {
+        
+
         private ObservableCollection<TempReading> _readings;
+        //private TempReadings _readings;
         private ObservableCollection<TempReading> _graphedReadings;
+        //private TempReadings _graphedReadings;
 
         public String FriendlyName { get; set; }
 
@@ -22,6 +28,13 @@ namespace ModernCaveMan {
             get { return readingTimer.Interval.TotalSeconds; }
             set { readingTimer.Interval = TimeSpan.FromSeconds(value); }
             }
+
+        public void TakeReading() {
+
+            }
+
+       public double GaugeMin { get { return TempMin - 25; } }
+       public double GaugeMax { get { return TempMax - 25; } }
 
         public AdcChannel DataChannel { get; set; }
 
@@ -53,6 +66,7 @@ namespace ModernCaveMan {
             TempTarget = targetTemp;
             ProbeInit();            
             }
+
         public Probe(int ID, string friendlyName, AdcChannel dataChannel, double targetTemp, double min, double max){
             this.ProbeID = ID;
             this.FriendlyName = friendlyName;
@@ -61,56 +75,75 @@ namespace ModernCaveMan {
             this.graphLength = 60;
             ProbeType = ProbeTypeEnu.Range;
             TempTarget = targetTemp;
-            TempMax = min;
-            TempMin = max;
+            TempMax = max;
+            TempMin = min;
             ProbeInit();
             }
 
         private void ProbeInit() {
             _readings = new ObservableCollection<TempReading>();
             _graphedReadings = new ObservableCollection<TempReading>();
-
-            readingTimer.Tick += TakeReading;
-            readingTimer.Start();
+            //_readings = new TempReadings();
+            //_graphedReadings = new TempReadings();
             }
-        
-        private void TakeReading(object sender, object e) {
-#if X86
-            TempReading LAST = Last();
-            if (LAST == null) LAST = new TempReading { ReadingValue = 250, ReadingTime = DateTime.Now };
-            Random rnd = new Random();
-            int newtmp = rnd.Next((int)LAST.ReadingValue - 5, (int)LAST.ReadingValue + 5);
-            if (newtmp > 300) newtmp = 300;
-            if (newtmp < 200) newtmp = 200;
-            
-            AddReading(newtmp); 
-#endif
-#if ARM
-            //DataChannel.ReadValue();
-#endif
-            }
-
 
         public TempReading Last() {
             if (_readings.Count <= 0) return null;
             return _readings[0];
             }
 
-        public void AddReading(double temp) {
+        private const double VRef = 5;
+        private const double mVRef = VRef*1000;
+        private const double FIXED_OHMS = 10000.0;
+        private Dictionary<double, double> THERM_TABLE = ThermisterSettings.Senstech100k25c.ThermisterTable;
+
+        public void AddReading(int adcVal) {
             if (_graphedReadings.Count > graphLength) _graphedReadings.RemoveAt(_graphedReadings.Count - 1);
-            TempReading newReading = new TempReading { ReadingValue = temp, ReadingTime = DateTime.Now };
+            TempReading newReading = new TempReading { ReadingTime = DateTime.Now };
+            int AdcMax = DataChannel == null ? 1023 : DataChannel.Controller.MaxValue;
+            
+            float reading = 0;
+            newReading.ADC = adcVal;
+
+            // convert the adc reading volts
+            newReading.Volts = ((mVRef / AdcMax) * adcVal) / 1000;
+
+            //Find the thermister restance using adc volts and fixed resistor 
+            newReading.Ohms = newReading.Volts*FIXED_OHMS/(VRef-newReading.Volts);
+
+            double tempA, tempB;
+
+            if (newReading.Ohms < THERM_TABLE.Last().Key) newReading.Ohms = THERM_TABLE.Last().Key + .000001;
+            if (newReading.Ohms > THERM_TABLE.First().Key) newReading.Ohms = THERM_TABLE.First().Key - .000001;
+
+            tempA = THERM_TABLE.First(r => newReading.Ohms > r.Key).Value;
+            tempB = THERM_TABLE.Last(r => newReading.Ohms < r.Key).Value;
+
+            newReading.TempC = (tempA + tempB) / 2;
+            newReading.TempF = newReading.TempC * 9 / 5 + 32;
+            newReading.TempK = newReading.TempC + 273.15;
+            
             _graphedReadings.Insert(0, newReading);
             _readings.Insert(0, newReading);
 
+            double temp = 0.0;
+
+            switch () {
+                default:
+                    break;
+                }
+
+
             if (ProbeOutOfRange != null && ProbeType == ProbeTypeEnu.Range &&
-                (newReading.ReadingValue > TempMax | newReading.ReadingValue < TempMin)) {
+                (newReading.TempC > TempMax | newReading.TempC < TempMin)) {
                 if (LastStateAtRead != ProbeState.OutOfRange) {
                     LastStateAtRead = ProbeState.OutOfRange;
                     ProbeOutOfRange(this, null);
                     }
                 }
+
             if (ProbeTargetReached != null && ProbeType == ProbeTypeEnu.Target &&
-                (newReading.ReadingValue >= TempTarget)) {
+                (newReading.TempC >= TempTarget)) {
                 if (LastStateAtRead != ProbeState.TargetReached) {
                     LastStateAtRead = ProbeState.TargetReached;
                     ProbeTargetReached(this, null);
@@ -118,7 +151,7 @@ namespace ModernCaveMan {
                 }
 
             if (ProbeBackInRange != null && ProbeType == ProbeTypeEnu.Range &&
-                (newReading.ReadingValue <= TempMax & newReading.ReadingValue >= TempMin)) {
+                (newReading.TempC <= TempMax & newReading.TempC >= TempMin)) {
                 if (LastStateAtRead == ProbeState.OutOfRange) {
                     LastStateAtRead = ProbeState.Good;
                     ProbeBackInRange(this, null);
@@ -132,6 +165,7 @@ namespace ModernCaveMan {
         public event EventHandler ProbeOutOfRange;
         public event EventHandler ProbeTargetReached;
         public event EventHandler ProbeBackInRange;
+        
         }
 
     enum ProbeState {
